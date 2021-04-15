@@ -17,7 +17,7 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: helidon-quickstart-se
+  name: helidon-quickstart-se1
   namespace: helidon-deployment
   labels:
     app: helidon-quickstart-se
@@ -28,7 +28,7 @@ spec:
   ports:
   - port: 9080
     targetPort: 9080
-    nodePort: 32045
+    nodePort: 32046
     name: http
 ---
 kind: Deployment
