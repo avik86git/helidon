@@ -5,10 +5,97 @@ import javax.json.bind.annotation.JsonbCreator;
 import javax.json.bind.annotation.JsonbProperty;
 
 public final class Reservation {
-    private String OrganizationCode;
-    private String ItemNumber;
+    private String organizationCode;
+    private String itemNumber;
     private String SubinventoryCode;
-    private int ReservationQuantity;
+    private int reservationQuantity;
+    private String RequirementDate;
+    private String DemandSourceType;
+    private String DemandSourceName;
+    private String SupplySourceType;
+
+    public Reservation(String organizationCode, String itemNumber, String subinventoryCode,
+                       int reservationQuantity, String requirementDate, String demandSourceType,
+                       String demandSourceName, String supplySourceType) {
+        this.organizationCode = organizationCode;
+        this.itemNumber = itemNumber;
+        SubinventoryCode = subinventoryCode;
+        this.reservationQuantity = reservationQuantity;
+        RequirementDate = requirementDate;
+        DemandSourceType = demandSourceType;
+        DemandSourceName = demandSourceName;
+        SupplySourceType = supplySourceType;
+    }
+
+    public String getRequirementDate() {
+        return RequirementDate;
+    }
+
+    public void setRequirementDate(String requirementDate) {
+        RequirementDate = requirementDate;
+    }
+
+    public String getDemandSourceType() {
+        return DemandSourceType;
+    }
+
+    public void setDemandSourceType(String demandSourceType) {
+        DemandSourceType = demandSourceType;
+    }
+
+    public String getDemandSourceName() {
+        return DemandSourceName;
+    }
+
+    public void setDemandSourceName(String demandSourceName) {
+        DemandSourceName = demandSourceName;
+    }
+
+    public String getSupplySourceType() {
+        return SupplySourceType;
+    }
+
+    public void setSupplySourceType(String supplySourceType) {
+        SupplySourceType = supplySourceType;
+    }
+
+
+
+
+
+    public String getOrganizationCode() {
+        return organizationCode;
+    }
+
+    public void setOrganizationCode(String organizationCode) {
+        this.organizationCode = organizationCode;
+    }
+
+    public String getItemNumber() {
+        return itemNumber;
+    }
+
+    public void setItemNumber(String itemNumber) {
+        this.itemNumber = itemNumber;
+    }
+
+    public String getSubinventoryCode() {
+        return SubinventoryCode;
+    }
+
+    public void setSubinventoryCode(String subinventoryCode) {
+        SubinventoryCode = subinventoryCode;
+    }
+
+    public int getReservationQuantity() {
+        return reservationQuantity;
+    }
+
+    public void setReservationQuantity(int reservationQuantity) {
+        this.reservationQuantity = reservationQuantity;
+    }
+
+
 
     /*
     public   Reservation (){
@@ -17,7 +104,7 @@ public final class Reservation {
         this.SubinventoryCode = "";
         this.ReservationQuantity = 0;
     }
-    */
+
 
     private Reservation(String organizationCode, String itemNumber, String SubinventoryCode, int reservationQuantity) {
         this.OrganizationCode = organizationCode;
@@ -26,7 +113,7 @@ public final class Reservation {
         this.ReservationQuantity = reservationQuantity;
 
     }
-
+   */
     /*@JsonbCreator
     public static Reservation of(@JsonbProperty("organizationCode") String organizationCode,
                           @JsonbProperty("itemNumber") String itemNumber,
@@ -42,7 +129,7 @@ public final class Reservation {
         return reservation;
     }*/
 
-    public static Reservation of(String organizationCode,
+    /*public static Reservation of(String organizationCode,
                                   String itemNumber,
                                   String subinventoryCode,
                                   int reservationQuantity){
@@ -54,36 +141,7 @@ public final class Reservation {
 
         Reservation reservation = new Reservation(organizationCode,itemNumber,subinventoryCode,reservationQuantity);
         return reservation;
-    }
-    public String getOrganizationCode() {
-        return OrganizationCode;
-    }
+    }*/
 
-    public void setOrganizationCode(String organizationCode) {
-        OrganizationCode = organizationCode;
-    }
 
-    public String getItemNumber() {
-        return ItemNumber;
-    }
-
-    public void setItemNumber(String itemNumber) {
-        ItemNumber = itemNumber;
-    }
-
-    public String getSubinventoryCode() {
-        return SubinventoryCode;
-    }
-
-    public void setSubinventoryCode(String subinventoryCode) {
-        SubinventoryCode = subinventoryCode;
-    }
-
-    public int getReservationQuantity() {
-        return ReservationQuantity;
-    }
-
-    public void setReservationQuantity(int reservationQuantity) {
-        ReservationQuantity = reservationQuantity;
-    }
 }

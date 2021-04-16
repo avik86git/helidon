@@ -11,12 +11,17 @@ import io.helidon.media.jsonb.JsonbSupport;
 import io.helidon.metrics.MetricsSupport;
 import io.helidon.webserver.Routing;
 import io.helidon.webserver.WebServer;
+import io.helidon.webserver.cors.CorsSupport;
+import io.helidon.webserver.cors.CrossOriginConfig;
 import org.eclipse.yasson.internal.JsonBinding;
+
+import org.fluentd.logger.FluentLogger;
 
 /**
  * The application main class.
  */
 public final class Main {
+
 
     /**
      * Cannot be instantiated.
@@ -29,6 +34,9 @@ public final class Main {
      * @param args command line arguments.
      */
     public static void main(final String[] args) {
+        //FluentLogger LOG = FluentLogger.getLogger("app", "129.213.13.244", 24224);
+        System.out.println("In main before log");
+        //LOG.log("kubernetes","Msg1","{source: 'find_item_api', message: 'Successful call to SaaS API - '+itemNum}");
         startServer();
     }
 
@@ -78,16 +86,31 @@ public final class Main {
     private static Routing createRouting(Config config) {
         MetricsSupport metrics = MetricsSupport.create();
         ItemReservationService itemReservationService = new ItemReservationService(config);
+        /*CorsSupport corsSupport = CorsSupport.builder()
+                .addCrossOrigin(CrossOriginConfig.create())
+                .build();*/
+        CorsSupport corsSupport1 = CorsSupport.builder()
+                .addCrossOrigin(CrossOriginConfig.builder()
+                        .allowOrigins("*")
+                        .allowMethods("*")
+                        .allowHeaders("*")
+                        .enabled(true)
+                        .build()
+                )
+                .addCrossOrigin(CrossOriginConfig.create())
+                .build();
+
         HealthSupport health = HealthSupport.builder()
                 .addLiveness(HealthChecks.healthChecks())   // Adds a convenient set of checks
                 .build();
-        new Main().callItemSearch();
+        //new Main().callItemSearch();
         return Routing.builder()
                 //.register(JsonBindingSupport.create())
+                //.register(JsonpSupport.create())
                 .register(health)                   // Health at "/health"
                 .register(metrics)                  // Metrics at "/metrics"
                 //.register("/greet", greetService)
-                .register("/item-reservation", itemReservationService)
+                .register("/item-reservation",corsSupport1, itemReservationService)
                 .build();
     }
 
